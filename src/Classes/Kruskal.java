@@ -73,7 +73,7 @@ class Kruskal {
 		return Kruskal.getMaximumSpanningTree(dimension, edges);
 		
 	}
-	
+	 //teste
 	public static List<Edge> getMaximumSpanningTree(int n, List<Edge> edges) {
 		
 		// Sort the edges in non-decreasing order of their weight
