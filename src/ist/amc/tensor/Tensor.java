@@ -1,6 +1,8 @@
-package Classes;
+package ist.amc.tensor;
 
 import java.util.HashMap;
+
+import ist.amc.dataset.DataSet;
 
 public class Tensor {
 	

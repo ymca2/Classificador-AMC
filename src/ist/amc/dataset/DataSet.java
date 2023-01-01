@@ -1,4 +1,4 @@
-package Classes;
+package ist.amc.dataset;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,11 +18,11 @@ public class DataSet implements Serializable {
 	    
 		private ArrayList<int []> dataList; //static - so ha um elemento para todo o programa
 		
-		DataSet() {
+		public DataSet() {
 			this.dataList = new ArrayList<int []>();
 		}
 		
-		DataSet(String csvFile)  {
+		public DataSet(String csvFile)  {
 			this.dataList = new ArrayList<int []>();
 			String line;
 			BufferedReader br;
@@ -85,6 +85,10 @@ public class DataSet implements Serializable {
 			}
 			return domain.stream().mapToInt(Number::intValue).toArray(); //number to int value transforma  num valor inteiro
 			
+		}
+		
+		public int getDomainLength(int position) {
+			return getDomain(position).length;
 		}
 		
 		public int countDependences(int positionI, int positionJ, int valorI, int valorJ) {

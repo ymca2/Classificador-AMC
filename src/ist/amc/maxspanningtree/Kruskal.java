@@ -1,59 +1,11 @@
-package Classes;
+package ist.amc.maxspanningtree;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-class Edge {
-	int u;
-	int v;
-	double weight;
-
-	public Edge(int u, int v, double weight) {
-		this.u = u;
-		this.v = v;
-		this.weight = weight;
-	}
-}
-
-class UnionFind {
-	int[] parent;
-	int[] rank;
-
-	public UnionFind(int n) {
-		parent = new int[n];
-		rank = new int[n];
-		for (int i = 0; i < n; i++) {
-			parent[i] = i;
-		}
-	}
-
-	public int find(int x) {
-		if (x != parent[x]) {
-			parent[x] = find(parent[x]);
-		}
-		return parent[x];
-	}
-
-	public void union(int x, int y) {
-		int xRoot = find(x);
-		int yRoot = find(y);
-		if (xRoot == yRoot) {
-			return;
-		}
-		if (rank[xRoot] < rank[yRoot]) {
-			parent[xRoot] = yRoot;
-		} else if (rank[xRoot] > rank[yRoot]) {
-			parent[yRoot] = xRoot;
-		} else {
-			parent[yRoot] = xRoot;
-			rank[xRoot]++;
-		}
-	}
-}
-
-class Kruskal {
+public class Kruskal {
 	
 	public static List<Edge> buildMaximumSpanningTree(Graph weigthedGraph) {
 		List<Edge> edges = new ArrayList<Edge>();

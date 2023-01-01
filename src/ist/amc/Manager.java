@@ -1,4 +1,4 @@
-package Classes;
+package ist.amc;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,29 +10,43 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import ist.amc.dataset.DataSet;
+import ist.amc.maxspanningtree.Edge;
+import ist.amc.maxspanningtree.Graph;
+import ist.amc.maxspanningtree.Kruskal;
+import ist.amc.mrft.MRFTree;
+import ist.amc.tensor.Tensor;
+
 public class Manager {
 	
 	public static void main(String[] args) {
 		
 		/*List<Edge> edges = new ArrayList<Edge>();
-		Edge edge0 = new Edge(0,3,1);
+		Edge edge0 = new Edge(3,4,9);
 		edges.add(edge0);
-		Edge edge1 = new Edge(0,1,4);
+		Edge edge1 = new Edge(3,0,8);
 		edges.add(edge1);
-		Edge edge2 = new Edge(0,2,2);
+		Edge edge2 = new Edge(3,6,7);
 		edges.add(edge2);
-		Edge edge3 = new Edge(3,1,1);
+		Edge edge3 = new Edge(3,1,6);
 		edges.add(edge3);
-		Edge edge4 = new Edge(1,2,2);
+		Edge edge4 = new Edge(0,5,5);
 		edges.add(edge4);
-		Edge edge5 = new Edge(2,3,10);
+		Edge edge5 = new Edge(0,8,4);
 		edges.add(edge5);
+		Edge edge6 = new Edge(2,0,3);
+		edges.add(edge6);
+		Edge edge7 = new Edge(7,0,3);
+		edges.add(edge7);
 		
-		List<Edge> results = Kruskal.getMaximumSpanningTree(4,edges);
+		List<Edge> results = Kruskal.getMaximumSpanningTree(9,edges);
 		
 		for(Edge item : results) {
-			System.out.println(String.format("%d - %d - weight = %d", item.u, item.v, item.weight));
-		}*/
+			System.out.println(String.format("%d - %d - weight = %f", item.getU(), item.getV(), item.getWeight()));
+		}
+		
+		MRFTree tree = MRFTree.buildTree(results);
+		System.out.println(tree);*/
 		
 		
 		
@@ -91,11 +105,15 @@ public class Manager {
 	            Graph weigthedGraph = Graph.buildGraph(t, fiber0);
 	            System.out.println(weigthedGraph);
 	            
-	            List<Edge> results = Kruskal.buildMaximumSpanningTree(weigthedGraph);
-	            for(Edge item : results) {
-	    			System.out.println(String.format("%d - %d - weight = %f", item.u, item.v, item.weight));
+	            List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph);
+	            for(Edge item : results1) {
+	    			System.out.println(String.format("%d - %d - weight = %f", item.getU(), item.getV(), item.getWeight()));
 	            
-	            }
+	            }	
+	    		
+	            MRFTree tree = MRFTree.buildTree(results1, fiber0);
+	    		System.out.println(tree);
+	            
 	            
 			} catch (IOException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block

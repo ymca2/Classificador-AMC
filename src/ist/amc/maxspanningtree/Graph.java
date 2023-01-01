@@ -1,6 +1,12 @@
-package Classes;
+package ist.amc.maxspanningtree;
 
 import java.util.Arrays;
+
+import ist.amc.dataset.DataSet;
+import ist.amc.tensor.Container;
+import ist.amc.tensor.ContainerKey;
+import ist.amc.tensor.Tensor;
+
 import static java.lang.Math.log;
 
 public class Graph {
