@@ -60,9 +60,6 @@ public class MRFTree {
 		if (!currentNode.isRoot()) {
 			Container container = currentNode.getMrftProbabilities();
 			ContainerKey containerKey = ContainerKey.buildContainerKey(individual[currentNode.getParentId()], individual[currentNode.getId()]);
-			System.out.println(container);
-			System.out.println(containerKey);
-			double x = container.get(containerKey);
 			accProbability *= container.get(containerKey);	
 			
 		}

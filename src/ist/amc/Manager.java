@@ -86,6 +86,7 @@ public class Manager {
 	            System.out.println(data);
 	            
 	            DataSet fiber0 = DataSet.buildFiber(data, 0);	
+	            DataSet fiber1 = DataSet.buildFiber(data, 1);
 	            System.out.println(fiber0);
 	            
 	            int [] domain = data.getDomain(3);
@@ -99,23 +100,28 @@ public class Manager {
 	           
 	            
 	            
-	            Tensor t = Tensor.build(fiber0);
-	            System.out.println(t);
+	            Tensor t0 = Tensor.build(fiber0);
+	            Tensor t1 = Tensor.build(fiber1);
+	            System.out.println(t0);
 	            
-	            Graph weigthedGraph = Graph.buildGraph(t, fiber0);
-	            System.out.println(weigthedGraph);
+	            Graph weigthedGraph0 = Graph.buildGraph(t0, fiber0);
+	            Graph weigthedGraph1 = Graph.buildGraph(t1, fiber1);
+	            System.out.println(weigthedGraph0);
 	            
-	            List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph);
-	            for(Edge item : results1) {
+	            List<Edge> results0 = Kruskal.buildMaximumSpanningTree(weigthedGraph0);
+	            List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph1);
+	            for(Edge item : results0) {
 	    			System.out.println(String.format("%d - %d - weight = %f", item.getU(), item.getV(), item.getWeight()));
 	            
 	            }	
 	    		
-	            MRFTree tree = MRFTree.buildTree(results1, fiber0);
-	    		System.out.println(tree);
+	            MRFTree tree0 = MRFTree.buildTree(results0, fiber0);
+	            MRFTree tree1 = MRFTree.buildTree(results1, fiber1);
+	    		System.out.println(tree0);
 	    		
 	    		int[] individual = {1,0,2,2,1,1,1,2,1,0};
-	    		System.out.println(tree.calculateFiberProbability(individual));
+	    		System.out.println(tree0.calculateFiberProbability(individual));
+	    		System.out.println(tree1.calculateFiberProbability(individual));
 	            
 	            
 			} catch (IOException | ClassNotFoundException e) {
