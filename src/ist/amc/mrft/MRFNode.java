@@ -10,6 +10,8 @@ public class MRFNode {
 	private Container mrftProbabilities;
 	private List<MRFNode> children;
 	
+	public static final int NO_PARENT = -1;
+	
 	
 	public MRFNode(int id, int parent, Container container) {
 		this.id = id;
@@ -41,6 +43,12 @@ public class MRFNode {
 	public Container getMrftProbabilities() {
 		return mrftProbabilities;
 	}
+	
+	public boolean isRoot() {
+		return (this.parent == MRFNode.NO_PARENT ? true : false);
+	}
+	
+	
 	
 	
 	

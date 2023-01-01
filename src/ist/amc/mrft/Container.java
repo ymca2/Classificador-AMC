@@ -21,7 +21,7 @@ public class Container {
 	}
 
 	public double get(ContainerKey key) {
-		return this.entries.get(key);
+		return this.entries.getOrDefault(key,1.0); //TODO: default value?? quando n
 	}
 	
 	public Set <ContainerKey> getList() {

@@ -1,2 +1,7 @@
 bcancer.csv
 bin/*
+.classpath
+.classpath
+.DS_Store
+.settings/org.eclipse.jdt.core.prefs
+src/.DS_Store

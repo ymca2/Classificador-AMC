@@ -5,6 +5,8 @@ public class ContainerKey {
 	private Integer i;
 	
 	private Integer j;
+	
+	
 
 	
 	public ContainerKey(Integer i, Integer j) {
@@ -34,6 +36,21 @@ public class ContainerKey {
 		 return containerKey;
 		 
 	 }
-	
+	 	 
+
+	@Override
+	public boolean equals(Object o) {
+		
+		if(this == o) return true;
+		if(o == null || getClass() != o.getClass()) return false;
+		ContainerKey containerKey = (ContainerKey) o;
+		return (this.i == containerKey.i && this.j == containerKey.j);
+	}
+
+
+	@Override
+	public int hashCode() {
+		return this.i * 1000 + this.j;
+	}	
 
 }

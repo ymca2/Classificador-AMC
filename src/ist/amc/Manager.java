@@ -113,6 +113,9 @@ public class Manager {
 	    		
 	            MRFTree tree = MRFTree.buildTree(results1, fiber0);
 	    		System.out.println(tree);
+	    		
+	    		int[] individual = {1,0,2,2,1,1,1,2,1,0};
+	    		System.out.println(tree.calculateFiberProbability(individual));
 	            
 	            
 			} catch (IOException | ClassNotFoundException e) {
