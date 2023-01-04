@@ -3,31 +3,31 @@ package ist.amc.maxspanningtree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class Kruskal {
-	
+
 	public static List<Edge> buildMaximumSpanningTree(Graph weigthedGraph) {
 		List<Edge> edges = new ArrayList<Edge>();
 		int dimension = weigthedGraph.getDimension();
-		for(int outerIndex=0; outerIndex<dimension; outerIndex ++) {
-			 for(int innerIndex=0; innerIndex<dimension; innerIndex ++) {
-				 if (outerIndex<innerIndex) {
+		for (int outerIndex = 0; outerIndex < dimension; outerIndex++) {
+			for (int innerIndex = 0; innerIndex < dimension; innerIndex++) {
+				if (outerIndex < innerIndex) {
 					double value = weigthedGraph.get(outerIndex, innerIndex);
-					if (value!=0) {
-						Edge edge= new Edge(outerIndex,innerIndex,value);
+					if (value != 0) {
+						Edge edge = new Edge(outerIndex, innerIndex, value);
 						edges.add(edge);
 					}
-					 
-				 }
-			 }
+
+				}
+			}
 		}
 		return Kruskal.getMaximumSpanningTree(dimension, edges);
-		
+
 	}
-	 //teste
+
+	// teste
 	public static List<Edge> getMaximumSpanningTree(int n, List<Edge> edges) {
-		
+
 		// Sort the edges in non-decreasing order of their weight
 		Collections.sort(edges, (e1, e2) -> -Double.compare(e1.weight, e2.weight));
 

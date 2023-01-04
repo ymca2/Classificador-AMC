@@ -1,4 +1,4 @@
-package ist.amc.backup;
+package ist.amc.analysis;
 
 import java.util.Arrays;
 
@@ -19,15 +19,19 @@ public class Matrix {
 	@Override
 	public String toString() {
 		String message = Arrays.deepToString(matrix);
-		return String.format("Matrix with dimension %d x %d, %s", lines, columns, message);
+		return String.format("Matrix with dimension %d x %d, %s \n", lines, columns, message).replaceAll("\\[", "\n\\[");
 	}
 
 	public void set(int line, int column, int value) {
-		this.matrix [line][column] = value;
+		this.matrix[line][column] = value;
 	}
 	
 	public int get(int line, int column) {
 		return this.matrix[line][column];
+	}
+	
+	public void inc(int line, int column) {
+		this.matrix[line][column]++;
 	}
 	
 	public static Matrix buildMatrix(int variableI, int variableJ, DataSet fiber) {
