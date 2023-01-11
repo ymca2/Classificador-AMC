@@ -24,25 +24,25 @@ public class MRFTree {
 		this.id = id;
 	}
 
-	private static void buildTreeRec(MRFNode current, List<Edge> edges, List<Integer> visited, int rootNode,
-			DataSet fiber) {
+	private static void buildTreeRec(MRFNode current, List<Edge> edges, List<Integer> visited, int rootNode, DataSet fiber, int i) {
 		List<Integer> adjacents = EdgeProcessor.getAdjacentNodes(edges, current.getId());
 		visited.add(current.getId());
 		List<Integer> nextOnes = EdgeProcessor.removeAll(adjacents, visited);
 		if (nextOnes.isEmpty())
 			return;
 		for (int nextOne : nextOnes) {
-			Container container = Container.buildContainer(current.getId(), nextOne, fiber, rootNode);
+			Container container = Container.buildContainer(current.getId(), nextOne, fiber, rootNode, i);
+			i++;
 			MRFNode newNode = new MRFNode(nextOne, current.getId(), container);
 			current.addChild(newNode);
-			buildTreeRec(newNode, edges, visited, rootNode, fiber);
+			buildTreeRec(newNode, edges, visited, rootNode, fiber, i);
 		}
 	}
 
 	public static MRFTree buildTree(List<Edge> edges, DataSet fiber) {
 		int rootNodeId = EdgeProcessor.getFirstNode(edges);
 		MRFNode rootNode = new MRFNode(rootNodeId, MRFNode.NO_PARENT, null);
-		MRFTree.buildTreeRec(rootNode, edges, new ArrayList<Integer>(), rootNodeId, fiber);
+		MRFTree.buildTreeRec(rootNode, edges, new ArrayList<Integer>(), rootNodeId, fiber,0);
 		MRFTree tree = new MRFTree(rootNode);// criamos uma arvore com um nó
 		tree.setId(fiber.getId());
 		return tree;

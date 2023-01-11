@@ -3,7 +3,6 @@ package ist.amc.tensor;
 public class ContainerKey {
 
 	private Integer i;
-
 	private Integer j;
 
 	public ContainerKey(Integer i, Integer j) {

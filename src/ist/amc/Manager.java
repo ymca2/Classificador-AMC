@@ -1,13 +1,15 @@
 package ist.amc;
 
-import java.io.FileInputStream;
+/*import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
+import java.util.List;*/
 
-import ist.amc.analysis.Matrix;
+
 import ist.amc.classifier.Classifier;
 import ist.amc.dataset.DataSet;
 
@@ -32,44 +34,38 @@ public class Manager {
 		 * MRFTree tree = MRFTree.buildTree(results); System.out.println(tree);
 		 */
 
-			DataSet data = new DataSet("data/thyroid.csv");
-			/*
-			 * System.out.println(data);
-			 * 
-			 * DataSet fiber0 = DataSet.buildFiber(data, 0); DataSet fiber1 =
-			 * DataSet.buildFiber(data, 1); System.out.println(fiber0);
-			 * 
-			 * int [] domain = data.getDomain(3);
-			 * System.out.println(Arrays.toString(domain));
-			 * 
-			 * System.out.println(data.countDependences(3,4,3,2));
-			 * 
-			 * System.out.println(data.getLineNumber());
-			 * 
-			 * System.out.println(data.countVariable(1, 0));
-			 * 
-			 * 
-			 * 
-			 * Tensor t0 = Tensor.build(fiber0); Tensor t1 = Tensor.build(fiber1);
-			 * System.out.println(t0);
-			 * 
-			 * Graph weigthedGraph0 = Graph.buildGraph(t0, fiber0); Graph weigthedGraph1 =
-			 * Graph.buildGraph(t1, fiber1); System.out.println(weigthedGraph0);
-			 * 
-			 * List<Edge> results0 = Kruskal.buildMaximumSpanningTree(weigthedGraph0);
-			 * List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph1);
-			 * for(Edge item : results0) {
-			 * System.out.println(String.format("%d - %d - weight = %f", item.getU(),
-			 * item.getV(), item.getWeight()));
-			 * 
-			 * }
-			 * 
-			 * MRFTree tree0 = MRFTree.buildTree(results0, fiber0); MRFTree tree1 =
-			 * MRFTree.buildTree(results1, fiber1); System.out.println(tree0); int[]
-			 * individual = {1,0,2,2,2,0,1,2,1,1};
-			 */
+	     	DataSet data = DataSet.buildDataSetold("data/letter.csv");
+			
+			
+			  //System.out.println(data);
+			  //DataSet fiber0 = DataSet.buildFiber(data, 0); DataSet fiber1 =
+			  //DataSet.buildFiber(data, 1); System.out.println(fiber0);
+			  
+			  
+			  
+			 
+			  //Tensor t0 = Tensor.build(fiber0); Tensor t1 = Tensor.build(fiber1);
+			  //System.out.println(t0);
+			 
+			 //Graph weigthedGraph0 = Graph.buildGraph(t0, fiber0); Graph weigthedGraph1 =
+			 //Graph.buildGraph(t1, fiber1); System.out.println(weigthedGraph0);
+			 
+			 //List<Edge> results0 = Kruskal.buildMaximumSpanningTree(weigthedGraph0);
+			 //List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph1);
+			 //for(Edge item : results0) {
+			 //System.out.println(String.format("%d - %d - weight = %f", item.getU(),
+			 //item.getV(), item.getWeight()));
+			 
+			// }
+			  
+			 //MRFTree tree0 = MRFTree.buildTree(results0, fiber0); MRFTree tree1 =
+			 //MRFTree.buildTree(results1, fiber1); System.out.println(tree0); 
+			 int[]individual = {2,0,2,2};			
 
 			Classifier classifier = Classifier.buildClassifier(data);
+			System.out.println(classifier.getClassifier(individual));
+			
+			
 			int match = 0, nonMatch = 0;
 			for (int[] ArrayIndex : data.dataList) {
 				int b = ArrayIndex [data.getColumnNumber()-1];

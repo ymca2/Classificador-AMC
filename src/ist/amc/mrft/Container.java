@@ -25,14 +25,14 @@ public class Container {
 		return this.entries.keySet();
 	}
 
-	public static Container buildContainer(int variableI, int variableJ, DataSet fiber, int root) {
+	public static Container buildContainer(int variableI, int variableJ, DataSet fiber, int root, int i) {
 		int[] domainI = fiber.getDomain(variableI);
 		int[] domainJ = fiber.getDomain(variableJ);
 		Container container = new Container();
 		for (int I : domainI) {
 			for (int J : domainJ) {
 				double result;
-				if (variableI == root || variableJ == root)
+				if (i==0)
 					result = CountProbability.calculateSpecialEdgeProbability(variableI, variableJ, I, J, fiber);
 				else
 					result = CountProbability.calculateOrdinaryEdgeProbability(variableI, variableJ, I, J, fiber);

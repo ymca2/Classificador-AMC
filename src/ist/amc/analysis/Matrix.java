@@ -38,7 +38,6 @@ public class Matrix {
 		int [] domainI = fiber.getDomain(variableI);
 		int [] domainJ = fiber.getDomain(variableJ);
 		Matrix matrix = new Matrix(domainI.length,domainJ.length);
-		int M = fiber.getLineNumber();
 		for(int I : domainI) {
 			for(int J : domainJ) {
 				int result = fiber.countDependences(variableI, variableJ, I, J);
