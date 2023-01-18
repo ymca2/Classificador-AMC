@@ -5,7 +5,7 @@
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
     <property name="dir.workspace" value="/Users/andregodinho/eclipse-workspace"/>
-    <property name="dir.jarfile" value="/Users/andregodinho/Documents/IST"/>
+    <property name="dir.jarfile" value="/Users/andregodinho/Documents/IST/Classifier"/>
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/Classificador.jar" filesetmanifest="mergewithoutmain">
             <manifest>

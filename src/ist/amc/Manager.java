@@ -1,5 +1,7 @@
 package ist.amc;
 
+import ist.amc.analysis.Matrix;
+
 /*import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,78 +19,34 @@ public class Manager {
 
 	public static void main(String[] args) {
 
-		/*
-		 * List<Edge> edges = new ArrayList<Edge>(); Edge edge0 = new Edge(3,4,9);
-		 * edges.add(edge0); Edge edge1 = new Edge(3,0,8); edges.add(edge1); Edge edge2
-		 * = new Edge(3,6,7); edges.add(edge2); Edge edge3 = new Edge(3,1,6);
-		 * edges.add(edge3); Edge edge4 = new Edge(0,5,5); edges.add(edge4); Edge edge5
-		 * = new Edge(0,8,4); edges.add(edge5); Edge edge6 = new Edge(2,0,3);
-		 * edges.add(edge6); Edge edge7 = new Edge(7,0,3); edges.add(edge7);
-		 * 
-		 * List<Edge> results = Kruskal.getMaximumSpanningTree(9,edges);
-		 * 
-		 * for(Edge item : results) {
-		 * System.out.println(String.format("%d - %d - weight = %f", item.getU(),
-		 * item.getV(), item.getWeight())); }
-		 * 
-		 * MRFTree tree = MRFTree.buildTree(results); System.out.println(tree);
-		 */
 
-	     	DataSet data = DataSet.buildDataSetold("data/letter.csv");
+	     	DataSet data = DataSet.buildDataSet("data/satimage.csv");
 			
 			
-			  //System.out.println(data);
-			  //DataSet fiber0 = DataSet.buildFiber(data, 0); DataSet fiber1 =
-			  //DataSet.buildFiber(data, 1); System.out.println(fiber0);
-			  
-			  
-			  
-			 
-			  //Tensor t0 = Tensor.build(fiber0); Tensor t1 = Tensor.build(fiber1);
-			  //System.out.println(t0);
-			 
-			 //Graph weigthedGraph0 = Graph.buildGraph(t0, fiber0); Graph weigthedGraph1 =
-			 //Graph.buildGraph(t1, fiber1); System.out.println(weigthedGraph0);
-			 
-			 //List<Edge> results0 = Kruskal.buildMaximumSpanningTree(weigthedGraph0);
-			 //List<Edge> results1 = Kruskal.buildMaximumSpanningTree(weigthedGraph1);
-			 //for(Edge item : results0) {
-			 //System.out.println(String.format("%d - %d - weight = %f", item.getU(),
-			 //item.getV(), item.getWeight()));
-			 
-			// }
-			  
-			 //MRFTree tree0 = MRFTree.buildTree(results0, fiber0); MRFTree tree1 =
-			 //MRFTree.buildTree(results1, fiber1); System.out.println(tree0); 
-			 int[]individual = {2,0,2,2};			
+			 int[]individual = {6,11,9,6,8,7,10,7,5,9,9,5,7,9,9,6,8,10,9,5,7,10,6,6,5,9,10,4,6,8,8,4,6,9,6,3};			
 
 			Classifier classifier = Classifier.buildClassifier(data);
-			System.out.println(classifier.getClassifier(individual));
 			
-			
-			int match = 0, nonMatch = 0;
-			for (int[] ArrayIndex : data.dataList) {
-				int b = ArrayIndex [data.getColumnNumber()-1];
-				if ( b == classifier.getClassifier(ArrayIndex)){
-					match++;
-				}
-				else nonMatch++;
-			}
-			double matchesNormalize = (double) ((double)match/(double)(match+nonMatch))*100;
-			double nonMatchesNormalize = (double)((double)nonMatch/(double)(match+nonMatch))*100;
-			
-			System.out.println((String.format("Matches %f \nNonMatches  %f",matchesNormalize,  nonMatchesNormalize)));
-			
-			/*Matrix confusionMatrix = new Matrix(dimension, dimension);
+			System.out.println((String.format("Classifier Result: %d",classifier.getClassifier(individual))));
+			System.out.println("");
+			int dimension = data.getDomainLength(data.getColumnNumber()-1);
+			Matrix confusionMatrix = new Matrix(dimension, dimension);
 			for (int[] index : data.getEntries()) {
-				// System.out.println(String.format("Best fit class %d", ));
 				int result = classifier.getClassifier(index);
 				confusionMatrix.inc(index[index.length-1],result);
 			}
-			System.out.println(confusionMatrix);*/
+			System.out.println(confusionMatrix);
+			
+			int truePositive = 0;
+			for(int i = 0; i<dimension; i++) {
+				truePositive += confusionMatrix.get(i, i);
+			}
+			System.out.println((String.format("True Positives: %d",truePositive)));
 			
 			
+			double accuracy = ((double)(truePositive)/data.getLineNumber())*100;
 			
+			System.out.println((String.format("Accuracy %f",accuracy)));
 
 		
 	}

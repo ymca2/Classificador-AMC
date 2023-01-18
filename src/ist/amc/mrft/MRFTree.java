@@ -10,12 +10,14 @@ public class MRFTree {
 
 	private MRFNode root;
 	private int id;
+	private double frequency;
 
 	public MRFTree(MRFNode root) {
 		this.root = root;
 
 	}
 
+	
 	public int getId() {
 		return id;
 	}
@@ -23,6 +25,18 @@ public class MRFTree {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	
+
+	public double getFrequency() {
+		return frequency;
+	}
+
+
+	public void setFrequency(double frequency) {
+		this.frequency = frequency;
+	}
+
 
 	private static void buildTreeRec(MRFNode current, List<Edge> edges, List<Integer> visited, int rootNode, DataSet fiber, int i) {
 		List<Integer> adjacents = EdgeProcessor.getAdjacentNodes(edges, current.getId());
@@ -45,6 +59,7 @@ public class MRFTree {
 		MRFTree.buildTreeRec(rootNode, edges, new ArrayList<Integer>(), rootNodeId, fiber,0);
 		MRFTree tree = new MRFTree(rootNode);// criamos uma arvore com um nó
 		tree.setId(fiber.getId());
+		tree.setFrequency(fiber.getFrequency());
 		return tree;
 	}
 
@@ -83,8 +98,8 @@ public class MRFTree {
 
 	}
 
-	public double calculateFiberProbability(int[] individual) {
-		return calculateFiberProbabilityRec(this.root, individual, 1.0);
+	public double calculateFiberProbability(int[] individual, int classIndex) {
+		return calculateFiberProbabilityRec(this.root, individual, this.frequency);
 	}
 
 }

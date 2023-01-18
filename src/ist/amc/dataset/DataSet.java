@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -20,35 +19,13 @@ public class DataSet implements Serializable {
 	private static final long serialVersionUID = -2955258415103571166L;
 	public ArrayList<int[]> dataList; // static - so ha um elemento para todo o programa
 	private int id;
-	public String message;
+	private String message;
+	private double frequency;
 
 	public DataSet() {
 		this.dataList = new ArrayList<int[]>();
 	}
 
-	
-	
-	
-	public static DataSet buildDataSetold(String csvFile) {
-		String line;
-		BufferedReader br;
-		DataSet dataset = new DataSet();
-		try {
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-				dataset.dataList.add(convert(line)); // add no array list - os arrays sao tipos basicos. o arraylist é uma
-												// coleção que simula um array mas é dinamico. Crio um arraylist vazio
-												// mas faço add add add
-			}
-			br.close();
-		} catch (Exception e) {		
-			e.printStackTrace();
-			//return e.getMessage();
-			dataset.message= e.getLocalizedMessage();
-		}
-		
-		return dataset;
-	}
 	
 	
 	public static DataSet buildDataSet(String filename) {
@@ -77,6 +54,35 @@ public class DataSet implements Serializable {
 		
 		return dataset;
 	}
+	
+	
+	
+	
+	
+
+
+	public String getMessage() {
+		return message;
+	}
+
+
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+
+
+	public double getFrequency() {
+		return frequency;
+	}
+
+
+
+	public void setFrequency(double frequency) {
+		this.frequency = frequency;
+	}
+
 
 
 	public int getId() {
@@ -115,12 +121,13 @@ public class DataSet implements Serializable {
 																		// usa poara criar um novo
 		DataSet dsFiber = new DataSet();
 		dsFiber.setId(classType);
-		for (int[] index : dataSet.get()) { // usamos o dataset como parametro, recebe o dataset e a fibra que se
-											// pretende usar, isto é necessário para a fiber estar static
+		for (int[] index : dataSet.get()) { 
+											
 			if (index[index.length - 1] == classType) {
 				dsFiber.add(Arrays.copyOf(index, index.length - 1));
 			}
 		}
+		dsFiber.setFrequency(dataSet.getVariableFrequency(dataSet.getColumnNumber()-1, classType));
 		return dsFiber;
 
 	}

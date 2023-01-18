@@ -1,5 +1,6 @@
 package ist.amc.window;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,6 +32,17 @@ public class DataReciever extends JFrame {
 	private JPanel contentPane;
 	private static JTextField nameOfTheFile;
 	private JTextField announcesThatLearnigEnded;
+	private static int columnSize;
+	
+	
+
+	public static int getColumnSize() {
+		return DataReciever.columnSize;
+	}
+
+	public static void setColumnSize(int columnSize) {
+		DataReciever.columnSize = columnSize;
+	}
 
 	/**
 	 * Launch the application.
@@ -52,7 +65,7 @@ public class DataReciever extends JFrame {
 	 */
 	
 	public DataReciever() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(200, 100, 450, 300);
 		setSize(500,210);
 		setLocation(100,100);
@@ -99,12 +112,13 @@ public class DataReciever extends JFrame {
 			    announcesThatLearnigEnded.setText(("Loading"));
 				Classifier classifier = sendClassifier();
 				announcesThatLearnigEnded.setText(("Done"));
-				InterfaceClassifier frame = new InterfaceClassifier(classifier, nameOfTheFile.getText());
+				InterfaceClassifier frame = new InterfaceClassifier(classifier, nameOfTheFile.getText(),DataReciever.getColumnSize(), (JFrame) JOptionPane.getFrameForComponent(buttonOfLearning) );
 				frame.setVisible(true);
+				
 				}
 			}
+			
 		});
-		
 		nameOfTheFile = new JTextField();
 		nameOfTheFile.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		GridBagConstraints gbc_nameOfTheFile = new GridBagConstraints();
@@ -132,13 +146,24 @@ public class DataReciever extends JFrame {
 		
 		public static Classifier sendClassifier() {
 			String filename = (nameOfTheFile.getText());
-			DataSet data = DataSet.buildDataSetold(filename);
+			DataSet data = DataSet.buildDataSet(filename);
+			Classifier classifier = null;
 			if (data.getLineNumber()== 0) {
-				JOptionPane.showMessageDialog(null, data.message);
+				JOptionPane.showMessageDialog(null, data.getMessage());
 			}
-			Classifier classifier = Classifier.buildClassifier(data);
+			else {
+			    classifier = Classifier.buildClassifier(data);
+			    DataReciever.setColumnSize(data.getColumnNumber()-1);
+			}
 			
 			return classifier;
+	}
+		
+		public static int StringSize() {
+			String filename = (nameOfTheFile.getText());
+			DataSet data = DataSet.buildDataSet(filename);
+			int dimension = data.getColumnNumber()-1;
+			return dimension;
 	}
 		
 		public static boolean doesFileExists(String filePath) {
@@ -148,7 +173,6 @@ public class DataReciever extends JFrame {
 			
 		}
 		
-
 	
 
 }

@@ -50,7 +50,7 @@ public class Classifier {
 		int bestClass = -1;
 		for (Integer index : this.classifierDomain) {
 			MRFTree mrftree = getTree(index);
-			double currentProbability = mrftree.calculateFiberProbability(individual);
+			double currentProbability = mrftree.calculateFiberProbability(individual, index);
 			if (currentProbability > maxProbability) {
 				maxProbability = currentProbability;
 				bestClass = index;

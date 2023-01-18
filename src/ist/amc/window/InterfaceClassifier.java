@@ -13,6 +13,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -21,12 +23,12 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
+
 public class InterfaceClassifier extends JFrame {
 
 	private static final long serialVersionUID = -9090701579562557461L;
 	private JPanel contentPane;
 	private JTextField StringReciver;
-	
 
 	/**
 	 * Launch the application.
@@ -47,7 +49,10 @@ public class InterfaceClassifier extends JFrame {
 	
 
 
-	public InterfaceClassifier(Classifier classifier, String fileName) {
+	public InterfaceClassifier(Classifier classifier, String fileName, int stringSize, JFrame datareciever) {
+		@SuppressWarnings("removal")
+		Integer size = new Integer(stringSize);
+		datareciever.dispose();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setSize(500,255);
@@ -113,9 +118,8 @@ public class InterfaceClassifier extends JFrame {
 		gbc_justText.gridy = 10;
 		contentPane.add(justText, gbc_justText);
 		
-		JLabel resultOfClassification = new JLabel("-");
+		JLabel resultOfClassification = new JLabel("---");
 		resultOfClassification.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		resultOfClassification.setBorder(new EmptyBorder(10, 0, 0, 0));
 		GridBagConstraints gbc_resultOfClassification = new GridBagConstraints();
 		gbc_resultOfClassification.anchor = GridBagConstraints.SOUTH;
 		gbc_resultOfClassification.gridx = 1;
@@ -128,8 +132,11 @@ public class InterfaceClassifier extends JFrame {
 		classifierFinal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String file = (StringReciver.getText());
-				int newClass = classifier.getClassifier(DataSet.convert(file));
+				String individual = (StringReciver.getText());
+				if (size != (individual.split(",")).length){
+				    JOptionPane.showMessageDialog(null,String.format("Error in input size! \nExpected size %d but recieved size %d",size,individual.split(",").length));
+				}
+				int newClass = classifier.getClassifier(DataSet.convert(individual));
 				resultOfClassification.setText(Integer.toString(newClass));
 				resultOfClassification.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 				resultOfClassification.setForeground(Color.BLUE);
@@ -146,6 +153,5 @@ public class InterfaceClassifier extends JFrame {
 		contentPane.add(classifierFinal, gbc_classifierFinal);
 	}
 	
-
 }
 
